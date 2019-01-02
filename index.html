@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<style>
+	ul{
+		width: 285px;
+		height: 150px;
+		border: 1px solid black;
+		margin: 10px 0px 0px;
+ 		padding: 0;
+	}
+	table tr th {
+		padding:0px;
+		margin:0px;
+	}
+
+
+	table td input{
+		padding:0;
+		vertical-align: bottom;
+	}
+
+	.astext {
+		background:none;
+		border:none;
+		margin:0;
+		padding:0;
+		cursor: pointer;
+	}
+	.item{
+		text-align: left;
+		float: right;
+		vertical-align: bottom;
+	}
+
+	</style>
+	<meta charset="utf-8"> 
+	<head>
+		<title>To-Do List</title>
+	</head>
+	<body>
+
+		<div>
+			<h3>To-Do List</h3>
+			<input type="text" placeholder="To-do">
+			<button onclick="addElement()">Add</button>
+		</div>
+
+		<table>
+			<tr><th>Tasks:</th><th></th><th></th><th></th></tr>
+			<tr>
+				<td>
+				<input type="checkbox" > I have a bike</input>
+				</td>
+				<td><button class="astext">Edit</button></td>
+				<td>|</td>
+				<td><button class="astext">Delete</button></td>
+			</tr>
+		</ul>
+
+	</body>
+</html>
