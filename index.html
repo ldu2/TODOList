@@ -1,37 +1,114 @@
 <!DOCTYPE html>
 <html>
 	<style>
-	ul{
-		width: 285px;
-		height: 150px;
-		border: 1px solid black;
-		margin: 10px 0px 0px;
- 		padding: 0;
+	/* The container */
+	.container{
+	  display: block;
+	  position: relative;
+	  padding: 1.5px 0px 0px 50px;
+	  cursor: pointer;
+	  font-size: 15px;
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
 	}
-	table tr th {
-		padding:0px;
-		margin:0px;
+	.container.checked{
+	 text-decoration: line-through;
+	}
+	/* Hide the browser's default checkbox */
+	.container input {
+	  position: absolute;
+	  opacity: 0;
+	  cursor: pointer;
+	  height: 0;
+	  width: 0;
 	}
 
-
-	table td input{
-		padding:0;
-		vertical-align: bottom;
+	/* Create a custom checkbox */
+	.checkmark {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  height: 15px;
+	  width: 15px;
+	  background-color: white;
+	  border: solid #ccc;
+	  border-width: 1.5px;
+	  border-radius: 2px;
 	}
 
+	/* On mouse-over, add a grey background color */
+	.container:hover input ~ .checkmark {
+	  background-color: #ccc;
+	}
+
+	/* When the checkbox is checked, add a blue background */
+	.container input:checked ~ .checkmark {
+	  background-color: #37A7D9;
+	}
+
+	/* Create the checkmark/indicator (hidden when not checked) */
+	.checkmark:after {
+	  content: "";
+	  position: absolute;
+	  display: none;
+	  border: solid black;
+	  border-width: 1.5px;
+	}
+
+	/* Show the checkmark when checked */
+	.container input:checked ~ .checkmark:after {
+	  display: block;
+	}
+
+	/* Style the checkmark/indicator */
+	.container .checkmark:after {
+	  left: 4px;
+	  top: 0px;
+	  width: 5px;
+	  height: 10px;
+	  border: solid white;
+	  border-width: 0 2px 2px 0;
+	  border-radius: 1px;
+	  -webkit-transform: rotate(45deg);
+	  -ms-transform: rotate(45deg);
+	  transform: rotate(45deg);
+	}
+	body div{
+		margin:0px 0px 0px 3px;
+	}
 	.astext {
 		background:none;
 		border:none;
 		margin:0;
 		padding:0;
 		cursor: pointer;
+		color:#91C6D9;
 	}
-	.item{
-		text-align: left;
-		float: right;
-		vertical-align: bottom;
+	table{
+		width:290px;
 	}
 
+	#table{
+		margin:10px 0px 0px 3px;
+		border-style: solid;
+		border-width: 1px;
+		height:150px;
+		width:290px;
+		border-radius: 2px;
+	}
+
+	#addBtn{
+		background-color:#27B470;
+		height:30px;
+		width:72px;
+		margin:0px 0px 0px 6px;
+		font-family:"Arial Black", Gadget, sans-serif;
+		font-size:18px;
+		color:white;
+		border-radius:5px;
+	}
 	</style>
 	<meta charset="utf-8"> 
 	<head>
@@ -41,21 +118,98 @@
 
 		<div>
 			<h3>To-Do List</h3>
-			<input type="text" placeholder="To-do">
-			<button onclick="addElement()">Add</button>
+			<input type="text" placeholder="To-do" id="inputText" onkeypress="addElementEnter(event)">
+			<button id="addBtn" onclick="addElement()">ADD</button>
 		</div>
+		<div id="table">
+		<table id="todoList">
+			<col align="left" width="68%">
+			<col width="32%">
+			<tr><th align="left">Tasks:</th></tr>
+		</table>
+		</div>
+	<script>
 
-		<table>
-			<tr><th>Tasks:</th><th></th><th></th><th></th></tr>
-			<tr>
-				<td>
-				<input type="checkbox" > I have a bike</input>
-				</td>
-				<td><button class="astext">Edit</button></td>
-				<td>|</td>
-				<td><button class="astext">Delete</button></td>
-			</tr>
-		</ul>
+		document.getElementById("inputText").value = '';
+		function addElement(){
+			if(document.getElementById("inputText").value ==''){
+				alert("Task cannot be empty");
+				return true;
+			}
 
+			//get the table and create the row from the small
+			//to big
+			let table = document.getElementById("todoList");
+			let row = document.createElement("tr");
+			let left = document.createElement("td");
+			let clabel = document.createElement("label");
+			let cbox = document.createElement("input");
+			let cmark = document.createElement("span");
+			let inputValue = document.getElementById("inputText").value;
+			//set attribute and wrap it up and get it to the left
+			cbox.setAttribute("type","checkbox");
+			cmark.setAttribute("class","checkmark");
+			clabel.setAttribute("class","container");
+			clabel.innerHTML=inputValue;
+			clabel.appendChild(cbox);
+			clabel.appendChild(cmark);
+			left.appendChild(clabel);
+			row.appendChild(left);
+			
+			//now the right hand side elements
+			let right = document.createElement("td");
+			let chunk = document.createElement("div");
+			let editButton = document.createElement("button");
+			let editTxt = document.createTextNode("edit");
+			let sepChar = document.createTextNode(" | ");
+			let deleteButton = document.createElement("button");
+			let deleteTxt = document.createTextNode("delete");
+			//stack them together and wrap them up
+			chunk.style.color = "#91C6D9";
+			editButton.appendChild(editTxt);
+			deleteButton.appendChild(deleteTxt);
+			editButton.setAttribute("class","astext");
+			editButton.setAttribute("id","editBtn");
+			deleteButton.setAttribute("class","astext");
+			deleteButton.setAttribute("id","delBtn");
+			deleteButton.onclick = function(){
+				var div = this.parentElement.parentElement.parentElement;
+    				div.style.display = "none";
+			}
+
+			editButton.onclick = function(){
+				let task = prompt("New Task", clabel.textContent);
+				if(task!=null){
+					clabel.innerHTML=task;
+					clabel.appendChild(cbox);
+					clabel.appendChild(cmark);
+				}
+			}
+
+
+			chunk.appendChild(editButton);
+			chunk.appendChild(sepChar);
+			chunk.appendChild(deleteButton);
+			right.appendChild(chunk);
+			//finally put them there
+			row.appendChild(right);
+			table.appendChild(row);
+			
+			clabel.addEventListener('click', function(ev) {
+			  if (ev.target.className === 'container') {
+			    ev.target.classList.toggle('checked');
+			  }
+			  else if (ev.target.className === 'container checked') {
+			    this.className = "container";
+			  }
+			}, false);
+			document.getElementById("inputText").value = '';
+		}
+
+		function addElementEnter(e){
+			if(e.keyCode == 13)
+				addElement();
+		}
+	</script>
 	</body>
 </html>
