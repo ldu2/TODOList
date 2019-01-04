@@ -1,0 +1,108 @@
+/* The container */
+.container{
+  display: block;
+  position: relative;
+  padding: 1.5px 0px 0px 50px;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.container.checked{
+ text-decoration: line-through;
+}
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: white;
+  border: solid #ccc;
+  border-width: 1.5px;
+  border-radius: 2px;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #37A7D9;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  border: solid black;
+  border-width: 1.5px;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 4px;
+  top: 0px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  border-radius: 1px;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+body div{
+	margin:0px 0px 0px 3px;
+}
+.astext {
+	background:none;
+	border:none;
+	margin:0;
+	padding:0;
+	cursor: pointer;
+	color:#91C6D9;
+}
+table{
+	width:290px;
+}
+
+#table{
+	margin:10px 0px 0px 3px;
+	border-style: solid;
+	border-width: 1px;
+	height:150px;
+	width:290px;
+	border-radius: 2px;
+}
+
+#addBtn{
+	background-color:#27B470;
+	height:30px;
+	width:72px;
+	margin:0px 0px 0px 6px;
+	font-family:"Arial Black", Gadget, sans-serif;
+	font-size:18px;
+	color:white;
+	border-radius:5px;
+}
