@@ -1,5 +1,6 @@
 $(function() {
-	$("#inputText").val('');});
+	$("#inputText").val('');
+});
 
 function addElement(){
 	if($("#inputText").val() ==''){
@@ -19,7 +20,12 @@ function addElement(){
 	//set attribute and wrap it up and get it to the left
 	clabel.text($('#inputText').val());
 	clabel.click(function() {
-	    clabel.toggleClass('checked');
+	    if(clabel.attr('class')=='container'){
+	    	clabel.toggleClass('checked');
+	    }
+	    else{
+		clabel.attr('class','container');
+	    }
 	});
 
 	clabel.append(cbox);
