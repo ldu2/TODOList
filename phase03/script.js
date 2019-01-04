@@ -1,5 +1,8 @@
+var myCheckList=[];
+var myItemList=[];
 $(function() {
 	$("#inputText").val('');
+	$("#inputNum").val('med');
 });
 
 function addElement(){
@@ -14,32 +17,35 @@ function addElement(){
 	let row = $("<tr></tr>");
 	let left = $("<td></td>");
 	let clabel = $("<label class='container'></label>");
+	let ctext = $("<span class=''></span>");
 	let cbox = $("<input type='checkbox'></input>");
 	let cmark = $("<span class='checkmark'></span>");
 
 	//set attribute and wrap it up and get it to the left
-	clabel.text($('#inputText').val());
+	ctext.text($('#inputText').val());
 	clabel.click(function(evt) {
-	    if(clabel.attr('class')=='container'){
-	    	clabel.toggleClass('checked');
+	    if(ctext.attr('class')==''){
+		ctext.attr('class','strikethrough');
 		cbox.prop('checked', true);
 	    }
 	    else{
-		clabel.attr('class','container');
+		ctext.attr('class','');
 		cbox.prop('checked', false);
 	    }
 	    //console.log(clabel.attr('class'));
 	    return false;
 	});
-
+	clabel.append(ctext);
 	clabel.append(cbox);
 	clabel.append(cmark);
 	left.append(clabel);
 	row.append(left);
 
-	//middle element : priority
-	//let middle = $("<td></td>");
-	//row.append(middle);
+	//middle element - priority
+	let middle = $("<td align='middle'></td>");
+	let priority = $("#inputNum").val();
+	middle.append(priority);
+	row.append(middle);
 
 	//now the right hand side elements
 	let right = $("<td></td>");
@@ -70,9 +76,19 @@ function addElement(){
 	
 	$("#inputText").val('');
 	$("#inputText").focus();
+	$("#inputNum").val('med');
+	myCheckList.push(cbox);
+	myItemList.push(row);
 }
 
 function addElementEnter(e){
 	if(e.keyCode == 13)
 		addElement();
+}
+function clearElement(){
+	let i = 0;
+	for(i=0;i<myCheckList.length;i++){
+		if(myCheckList[i].is(":checked"))
+			myItemList[i].css('display','none');
+	}
 }

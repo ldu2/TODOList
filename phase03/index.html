@@ -13,7 +13,11 @@
 		<div>
 			<h3>To-Do List</h3>
 			<input type="text" placeholder="To-do" id="inputText" onkeypress="addElementEnter(event)">
-			<input type="text" style="width:60px" placeholder="Priority" id="inputText" onkeypress="addElementEnter(event)">
+			 <select id="inputNum" style="width:89px" placeholder="Priority">
+			  <option value="high">High</option>
+			  <option value="med">Med</option>
+			  <option value="low">Low</option>
+			</select> 
 			<button id="addBtn" onclick="addElement()">ADD</button>
 			<button id="clearBtn" onclick="clearElement()">CLEAR</button>
 		</div>
@@ -24,7 +28,7 @@
 			<col width="20%">
 			<tr>
 				<th align="left">Tasks:</th>
-				<th align="left">Priority</th>
+				<th >Priority</th>
 			</tr>
 		</table>
 		</div>
