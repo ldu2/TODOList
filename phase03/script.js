@@ -51,11 +51,9 @@ function addElement(){
 	let right = $("<td></td>");
 	let chunk = $("<div style='color:#91C6D9'></div>");
 	let editButton = $("<button class = 'astext' id='editBtn'>edit</button>").click(function () {
-			let task = prompt("New Task", clabel.text());
+			let task = prompt("New Task", ctext.text());
 			if(task!=null){
-				clabel.text(task);
-				clabel.append(cbox);
-				clabel.append(cmark);
+				ctext.text(task);
 			}
 		}
 	);
