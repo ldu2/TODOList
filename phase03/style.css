@@ -83,16 +83,18 @@ body div{
 	cursor: pointer;
 	color:#91C6D9;
 }
+
+/* The reason for table and #table is the minimum height of the box*/
 table{
-	width:290px;
+	width:470px;
 }
 
 #table{
 	margin:10px 0px 0px 3px;
 	border-style: solid;
 	border-width: 1px;
-	height:150px;
-	width:290px;
+	height:200px;
+	width:470px;
 	border-radius: 2px;
 }
 

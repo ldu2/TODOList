@@ -19,20 +19,28 @@ function addElement(){
 
 	//set attribute and wrap it up and get it to the left
 	clabel.text($('#inputText').val());
-	clabel.click(function() {
+	clabel.click(function(evt) {
 	    if(clabel.attr('class')=='container'){
 	    	clabel.toggleClass('checked');
+		cbox.prop('checked', true);
 	    }
 	    else{
 		clabel.attr('class','container');
+		cbox.prop('checked', false);
 	    }
+	    //console.log(clabel.attr('class'));
+	    return false;
 	});
 
 	clabel.append(cbox);
 	clabel.append(cmark);
 	left.append(clabel);
 	row.append(left);
-	
+
+	//middle element : priority
+	//let middle = $("<td></td>");
+	//row.append(middle);
+
 	//now the right hand side elements
 	let right = $("<td></td>");
 	let chunk = $("<div style='color:#91C6D9'></div>");
@@ -61,6 +69,7 @@ function addElement(){
 	table.append(row);
 	
 	$("#inputText").val('');
+	$("#inputText").focus();
 }
 
 function addElementEnter(e){

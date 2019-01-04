@@ -13,13 +13,19 @@
 		<div>
 			<h3>To-Do List</h3>
 			<input type="text" placeholder="To-do" id="inputText" onkeypress="addElementEnter(event)">
+			<input type="text" style="width:60px" placeholder="Priority" id="inputText" onkeypress="addElementEnter(event)">
 			<button id="addBtn" onclick="addElement()">ADD</button>
+			<button id="clearBtn" onclick="clearElement()">CLEAR</button>
 		</div>
 		<div id="table">
 		<table id="todoList">
-			<col align="left" width="68%">
-			<col width="32%">
-			<tr><th align="left">Tasks:</th></tr>
+			<col align="left" width="60%">
+			<col width="20%">
+			<col width="20%">
+			<tr>
+				<th align="left">Tasks:</th>
+				<th align="left">Priority</th>
+			</tr>
 		</table>
 		</div>
 	</body>
