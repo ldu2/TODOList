@@ -58,8 +58,8 @@ function addElement(){
 		}
 	);
 	let sepChar = " | ";
-	let deleteButton = $("<button class = 'astext' id='delBtn'>delete</button>").click(function(){
-			$("#delBtn").parent().parent().parent().css("display","none");
+	let deleteButton = $("<button class = 'astext'>delete</button>").click(function(){
+			$(this).parent().parent().parent().css("display","none");
 		}
 	);
 	//stack them together and wrap them up
