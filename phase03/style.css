@@ -91,7 +91,8 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-body div{
+
+#listHeader{
 	margin:0px 0px 0px 3px;
 }
 .astext {
@@ -103,7 +104,14 @@ body div{
 	color:#91C6D9;
 }
 
-/* The reason for table and #table is the minimum height of the box*/
+/* 
+	table is the actually element table.
+	#table is the id of the div that wrap around the table.
+	Since when the table is empty, we want to keep the frame of the box
+	(like shown in the demo link). I chose to use the div to show the frame
+	and table to manage each row. Not sure if this is the best solution, it does
+	the trick to keep the look though.
+*/
 table{
 	width:470px;
 }

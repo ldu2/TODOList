@@ -2,10 +2,10 @@ var myCheckList=[];
 var myItemList=[];
 $(function() {
 	$("#inputText").val('');
-	$("#inputNum").val('med');
+	$("#inputPriority").val('med');
 });
 
-function addElement(){
+addElement = () => {
 	if($("#inputText").val() ==''){
 		alert("Task cannot be empty");
 		return true;
@@ -75,18 +75,22 @@ function addElement(){
 	$("#inputText").val('');
 	$("#inputText").focus();
 	$("#inputNum").val('med');
-	myCheckList.push(cbox);
 	myItemList.push(row);
 }
 
-function addElementEnter(e){
+addElementEnter = (e) => {
 	if(e.keyCode == 13)
 		addElement();
 }
-function clearElement(){
-	let i = 0;
-	for(i=0;i<myCheckList.length;i++){
-		if(myCheckList[i].is(":checked"))
-			myItemList[i].css('display','none');
-	}
+
+clearElement = () => {
+	
+	myItemList = myItemList.filter((item) => {
+		if(item.find("input").is(":checked")) 
+			item.css('display','none');
+		return !item.find("input").is(":checked");
+	});
+	//console.log(myItemList);
+	
+	
 }
