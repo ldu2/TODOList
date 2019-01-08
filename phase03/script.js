@@ -1,9 +1,19 @@
-var myCheckList=[];
+
 var myItemList=[];
 $(function() {
 	$("#inputText").val('');
 	$("#inputPriority").val('med');
+	$("#clearBtn").prop('disabled' ,true);
 });
+
+checkClrBtn = () =>{
+	if(myItemList.filter( item => item.find("input").is(":checked")).length>0){
+		$("#clearBtn").prop('disabled',false);
+	}
+	else{
+		$("#clearBtn").prop('disabled' ,true);
+	}
+}
 
 addElement = () => {
 	if($("#inputText").val() ==''){
@@ -32,7 +42,7 @@ addElement = () => {
 		ctext.attr('class','');
 		cbox.prop('checked', false);
 	    }
-	    //console.log(clabel.attr('class'));
+	    checkClrBtn();
 	    return false;
 	});
 	clabel.append(ctext);
@@ -43,7 +53,7 @@ addElement = () => {
 
 	//middle element - priority
 	let middle = $("<td align='middle'></td>");
-	let priority = $("#inputNum").val();
+	let priority = $("#inputPriority").val();
 	middle.append(priority);
 	row.append(middle);
 
@@ -59,7 +69,9 @@ addElement = () => {
 	);
 	let sepChar = " | ";
 	let deleteButton = $("<button class = 'astext'>delete</button>").click(function(){
-			$(this).parent().parent().parent().css("display","none");
+			$(this).parent().parent().parent().remove();
+			myItemList.splice(myItemList.indexOf(row),1);
+			checkClrBtn();
 		}
 	);
 	//stack them together and wrap them up
@@ -84,13 +96,12 @@ addElementEnter = (e) => {
 }
 
 clearElement = () => {
-	
 	myItemList = myItemList.filter((item) => {
 		if(item.find("input").is(":checked")) 
 			item.css('display','none');
 		return !item.find("input").is(":checked");
 	});
-	//console.log(myItemList);
-	
-	
+	$("#clearBtn").prop('disabled' ,true);
 }
+
+

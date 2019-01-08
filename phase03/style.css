@@ -113,7 +113,7 @@
 	the trick to keep the look though.
 */
 table{
-	width:470px;
+	width:100%;
 }
 
 #table{
@@ -137,6 +137,17 @@ table{
 }
 #clearBtn{
 	background-color:#b4276b;
+	height:30px;
+	width:87.5px;
+	margin:0;
+	font-family:"Arial Black", Gadget, sans-serif;
+	font-size:18px;
+	color:white;
+	border-radius:5px;
+}
+
+#clearBtn:disabled {
+	background-color: gray;
 	height:30px;
 	width:87.5px;
 	margin:0;
